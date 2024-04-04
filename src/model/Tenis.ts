@@ -8,7 +8,6 @@ export class Tenis extends Produto {
         super(id, nome, tipo, preco); // Atributos da Classe Produto 
         this._cor = cor;
     }
-
     /** 
      * Getter cor 
      * @return {string} 

@@ -1,7 +1,7 @@
 import { Produto } from "../model/Produto";
 import { ProdutoRepository } from "../repository/ProdutoRepository";
 import { Camisa } from "../model/Camisa"; // teste
-import { Tenis } from "../model/Tenis";  
+import { Tenis } from "../model/Tenis";  // teste
 
 export class ProdutoController implements ProdutoRepository {
     private listaProdutos: Array<Produto> = new Array<Produto>();
@@ -18,7 +18,8 @@ export class ProdutoController implements ProdutoRepository {
         if (buscaproduto !== null)
             buscaproduto.visualizar();
         else
-            console.log("\nProduto não foi encontrado!");
+            console.log("\nProcurei aqui, e não achei.. ");
+            console.log("           ¯|_(ツ)_|¯");
     }
 
     buscarNoArray(id: number) {
@@ -36,9 +37,8 @@ export class ProdutoController implements ProdutoRepository {
         }
     }
 
-    // Novo método para listar apenas camisas
     listarCamisas(): void {
-        console.log("Listando todas as camisas:");
+        console.log("Listando todas as camisas:"); //método "listar camisas"
         for (let produto of this.listaProdutos) {
             if (produto instanceof Camisa) {
                 produto.visualizar();
@@ -47,17 +47,17 @@ export class ProdutoController implements ProdutoRepository {
     }
 
     listarTenis(): void {
-        console.log("Listando todos os tênis:");//método para listar apenas tênis
+        console.log("Listando todos os tênis:"); 
         for (let produto of this.listaProdutos) {
             if (produto instanceof Tenis) {
-                produto.visualizar();
+                produto.visualizar();//metodo "listar so tênis"
             }
         }
     }
 
     cadastrar(produto: Produto): void {
         this.listaProdutos.push(produto);
-        console.log("O produto foi adicionado!");
+        console.log("Novo produto CADASTRADO!          ");
     }
 
     atualizar(produto: Produto): void {
@@ -65,9 +65,10 @@ export class ProdutoController implements ProdutoRepository {
 
         if (buscaProduto !== null) {
             this.listaProdutos[this.listaProdutos.indexOf(buscaProduto)] = produto;
-            console.log(`O produto numero ${produto.id} foi atualizado com exito!`);
+            console.log(`Produto numero ${produto.id} foi atualizado com sucessoo!`);
         } else
-            console.log("\nProduto nao foi encontrado!");
+            console.log("\nProcurei aqui, e não achei.. ");
+            console.log("           ¯|_(ツ)_|¯"        );
     }
 
     deletar(id: number): void {
@@ -75,8 +76,9 @@ export class ProdutoController implements ProdutoRepository {
 
         if (buscaProduto !== null) {
             this.listaProdutos.splice(this.listaProdutos.indexOf(buscaProduto), 1);
-            console.log(`O produto numero ${id} foi excluido com exito!`);
+            console.log(`O produto numero ${id} foi DELETADO!!`);
         } else
-            console.log("\nProcurei aqui, e não achei..¯|_(ツ)_|¯");
+            console.log("\nProcurei aqui, e não achei.. ");
+            console.log("\n           ¯|_(ツ)_|¯        ");
     }
 }

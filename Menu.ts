@@ -31,34 +31,37 @@ export function main() {
         console.log("                                                     ",
         colors.reset);
 
-        console.log(colors.bg.yellow, colors.fg.greenstrong,
-        "\Entre com a opção desejada:                    ");
+        console.log(colors.bg.greenbright, colors.fg.white,
+          "\nEscolha uma opção, Mano:                  ");
         opcao = readlinesync.questionInt("");
 
         switch (opcao) {
             case 1:
-                console.log("Cadastrar Produto!");
+                console.log(colors.bg.greenbright, colors.fg.white,
+                            "\nCadastrar Produtos!");
 
                 let tipo = readlinesync.keyInSelect(TipodeProdutos, "Yeah Brother, chegou produto novo na loja?: ", { cancel: 'Sair' });
-                let nome = readlinesync.question("Qual é nome do produto?: ");
+                let nome = readlinesync.question("Qual e nome do produto?: ");
 
-                let preco = readlinesync.questionFloat("E o PREÇO?: ");
+                let preco = readlinesync.questionFloat("Iradooo! E o PRECO?: ");
 
                 if (tipo === 0) { // Camisa
-                    let tipoCamisa = readlinesync.question("Digite o tipo da camisa: ");
+                    let tipoCamisa = readlinesync.question("Digite o tipo da camisa: "); //pensar logica "tamanhos"(p,m,g)
                     let camisa = new Camisa(produtos.length + 1, nome, tipo + 1, preco, tipoCamisa);
                     produtos.push(camisa);
+
+
                 } else if (tipo === 1) { // Tenis
-                    let cor = readlinesync.question("Digite a cor do tenis: ");
+                    let cor = readlinesync.question("Digite a cor do tenis: ");//pensar logica "tamanhos"(36,37,38)
                     let tenis = new Tenis(produtos.length + 1, nome, tipo + 1, preco, cor);
                     produtos.push(tenis);
                 }
 
-                console.log("Produto cadastrado com sucesso");
+                console.log("Wow, cadastramos um novo produto!");
                 keyPress();
                 break;
             case 2:
-                console.log("Listar todas os Produtos!");
+                console.log("Listar todos os Produtos!");
                 produtos.forEach(produto => produto.visualizar());
                 keyPress();
                 break;
@@ -69,7 +72,9 @@ export function main() {
                 if (produtoEncontrado) {
                     produtoEncontrado.visualizar();
                 } else {
-                    console.log("Produto não encontrado.");
+                    console.log(colors.bg.redbright, colors.fg.white,
+                                "\nProcurei aqui, e não achei.. ");
+                    console.log("           ¯|_(ツ)_|¯"          );
                 }
                 keyPress();
                 break;
@@ -81,8 +86,11 @@ export function main() {
                     let novoNome = readlinesync.question("Digite o novo nome do Produto: ");
                     produtoParaAtualizar.nome = novoNome; 
                     console.log("Produto atualizado com sucesso.");
-                } else {
-                    console.log("Produto não encontrado.");
+
+            }   else {
+                    console.log(colors.bg.whitebright, colors.fg.redstrong,
+                             "\nProcurei aqui, e não achei.. ");
+                    console.log("           ¯|_(ツ)_|¯"       );
                 }
                 keyPress();
                 break;
@@ -93,21 +101,26 @@ export function main() {
                 let indiceParaDeletar = produtos.findIndex(produto => produto.id === idDeletar); //pensar pergunta de verficacao, questionando se o cliente realmente deseja excluir o produto
                 if (indiceParaDeletar !== -1) {
                     produtos.splice(indiceParaDeletar, 1);
-                    console.log("Produto deletado com sucesso."); //pensar em algua logica de backup, caso o cliente tente voltar atras. mesmo apagando
-                } else {
-                    console.log("Procurei aqui, e não achei..");
+                    console.log("Produto excluido com sucesso."); //pensar em alguma logica de backup, caso o cliente tente voltar atras. mesmo apagando
+
+            }   else{
+                    console.log(colors.bg.redbright, colors.fg.white,
+                        "\nProcurei aqui, e não achei.. "  );
+                    console.log("           ¯|_(ツ)_|¯"    );
                 }
                 keyPress();
                 break;
 
             case 0:
-                
-                console.log("\nMano Sports, Isso é preço de irmão!\n");
-                console.log("\nagradecemos sua preferencia!\n");
+                console.log(colors.bg.green, colors.fg.whitestrong,
+                      "\nMano Sports, parece coisa de 'irmão!'\n");
+                console.log("=====> Agradecemos sua preferencia!");
                 sobre();
                 break;
             default:
-                console.log("escolha uma opção válida.");
+                console.log(colors.bg.redbright, colors.fg.white,
+                           "\nNao inventa, Mano.. ");
+                console.log("           ¯|_(ツ)_|¯");
                 keyPress();
                 break;
         }

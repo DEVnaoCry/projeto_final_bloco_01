@@ -12,7 +12,6 @@ export abstract class Produto {
         this._preco = preco;
     }
 
-
     /**
      * Getter id
      * @return {number}
@@ -91,11 +90,17 @@ export abstract class Produto {
         }
 
         console.log("_______________________________");
-        console.log("PRODUTO");
-        console.log("_______________________________");
-        console.log(`Id do produto: ${this._id}`     );
-        console.log(`Nome do produto: ${this._nome}` );
-        console.log(`Tipo do produto: ${tipo}`);
+        console.log("P*         +---+TYPESCRIPT+---+")
+        console.log("_R*        | @ |.QR-CODEJ.| @ |")
+        console.log("__O*       +---+{QR--CODE}+---+")
+        console.log("____D*     tURMA{-TS--CODE}jAVA")
+        console.log("_____U*    $$$4!{-QRCODE}sCRipt")
+        console.log("______T*   +---+aLgRmXsD | X|Oj")
+        console.log("        O  | @ |.BkHqNwTc+ -+nK")
+        console.log("           +---+.cJiPoVuBaVuMlA")
+        console.log(`Id do produto: ${this._id}`     )
+        console.log(`Nome do produto: ${this._nome}` )
+        console.log(`Tipo do produto: ${tipo}`       )
         console.log(`Preço do produto: ${this._preco}`);
     }
 }

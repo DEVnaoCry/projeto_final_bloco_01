@@ -1,4 +1,4 @@
-export const colors = {
+export const colors = { //cores
     reset: "\x1b[0m",
     fg: {
         black: "\x1b[30m",
