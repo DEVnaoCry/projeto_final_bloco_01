@@ -1,9 +1,12 @@
 import readlinesync = require("readline-sync");
 import { colors } from "./src/util/Colors";
+import { Camisa } from "./src/model/Camisa";
+import { Tenis } from "./src/model/Tenis";
 
 let opcao, id, tipo, preco: number;
 let nome, cor: string;
-let tipoProduto = ["Camisa", "Tenis"];
+let TipodeProdutos = ["Camisa", "Tenis"];
+let produtos: (Camisa | Tenis)[] = [];
 
 export function main() {
 
@@ -34,35 +37,41 @@ export function main() {
 
         switch (opcao) {
             case 1:
-                console.log(colors.bg.yellow, colors.fg.greenstrong,
-                    "\nCadastrar Produto!");
+                console.log("Cadastrar Produto!");
 
-                nome = readlinesync.question("Digite o Nome do Produto: ");
+                let nome = readlinesync.question("Digite o Nome do Produto: ");
 
-                tipo = readlinesync.keyInSelect(tipoProduto, "", { cancel: false }) + 1;
+                let tipo = readlinesync.keyInSelect(TipodeProdutos, "Escolha o tipo do Produto: ", { cancel: 'Sair' });
 
-                preco = readlinesync.questionFloat("Digite o preco: ");
+                let preco = readlinesync.questionFloat("Digite o preco: ");
 
-                switch (tipo) {
-                    case 1:
-
-                        break;
-                    case 2:
-
-                        break;
+                if (tipo === 0) { // Camisa
+                    let tipoCamisa = readlinesync.question("Digite o tipo da camisa: ");
+                    let camisa = new Camisa(produtos.length + 1, nome, tipo + 1, preco, tipoCamisa);
+                    produtos.push(camisa);
+                } else if (tipo === 1) { // Tenis
+                    let cor = readlinesync.question("Digite a cor do tênis: ");
+                    let tenis = new Tenis(produtos.length + 1, nome, tipo + 1, preco, cor);
+                    produtos.push(tenis);
                 }
-
-
 
                 console.log("Produto cadastrado com sucesso");
                 keyPress();
                 break;
             case 2:
                 console.log("Listar todas os Produtos!");
+                produtos.forEach(produto => produto.visualizar());
                 keyPress();
                 break;
             case 3:
                 console.log("Listar Produto pelo ID!");
+                let idBuscar = readlinesync.questionInt("Digite o ID do Produto: ");
+                let produtoEncontrado = produtos.find(produto => produto.id === idBuscar);
+                if (produtoEncontrado) {
+                    produtoEncontrado.visualizar();
+                } else {
+                    console.log("Produto não encontrado.");
+                }
                 keyPress();
                 break;
             case 4:
@@ -93,9 +102,7 @@ function keyPress(): void {
     readlinesync.prompt();
 }
 
-/* Função com os meus dados */
-export function sobre(): void {
-
+export function sobre(): void { // "saiba mais"
     console.log("_________________________________________");
     console.log("  Desenvolvido por: Filipe Santiago      ");
     console.log("      https://github.com/DEVnaoCry       ");
