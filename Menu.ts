@@ -39,18 +39,17 @@ export function main() {
             case 1:
                 console.log("Cadastrar Produto!");
 
-                let nome = readlinesync.question("Digite o Nome do Produto: ");
+                let tipo = readlinesync.keyInSelect(TipodeProdutos, "Yeah Brother, chegou produto novo na loja?: ", { cancel: 'Sair' });
+                let nome = readlinesync.question("Qual é nome do produto?: ");
 
-                let tipo = readlinesync.keyInSelect(TipodeProdutos, "Escolha o tipo do Produto: ", { cancel: 'Sair' });
-
-                let preco = readlinesync.questionFloat("Digite o preco: ");
+                let preco = readlinesync.questionFloat("E o PREÇO?: ");
 
                 if (tipo === 0) { // Camisa
                     let tipoCamisa = readlinesync.question("Digite o tipo da camisa: ");
                     let camisa = new Camisa(produtos.length + 1, nome, tipo + 1, preco, tipoCamisa);
                     produtos.push(camisa);
                 } else if (tipo === 1) { // Tenis
-                    let cor = readlinesync.question("Digite a cor do tênis: ");
+                    let cor = readlinesync.question("Digite a cor do tenis: ");
                     let tenis = new Tenis(produtos.length + 1, nome, tipo + 1, preco, cor);
                     produtos.push(tenis);
                 }
@@ -76,13 +75,33 @@ export function main() {
                 break;
             case 4:
                 console.log("Atualizar Produto!");
+                let idAtualizar = readlinesync.questionInt("Digite o ID do Produto para atualizar: ");
+                let produtoParaAtualizar = produtos.find(produto => produto.id === idAtualizar);
+                if (produtoParaAtualizar) {
+                    let novoNome = readlinesync.question("Digite o novo nome do Produto: ");
+                    produtoParaAtualizar.nome = novoNome; 
+                    console.log("Produto atualizado com sucesso.");
+                } else {
+                    console.log("Produto não encontrado.");
+                }
                 keyPress();
                 break;
+
             case 5:
                 console.log("Deletar Produto!");
+                let idDeletar = readlinesync.questionInt("Digite o ID do Produto para deletar: ");
+                let indiceParaDeletar = produtos.findIndex(produto => produto.id === idDeletar); //pensar pergunta de verficacao, questionando se o cliente realmente deseja excluir o produto
+                if (indiceParaDeletar !== -1) {
+                    produtos.splice(indiceParaDeletar, 1);
+                    console.log("Produto deletado com sucesso."); //pensar em algua logica de backup, caso o cliente tente voltar atras. mesmo apagando
+                } else {
+                    console.log("Procurei aqui, e não achei..");
+                }
                 keyPress();
                 break;
+
             case 0:
+                
                 console.log("\nMano Sports, Isso é preço de irmão!\n");
                 console.log("\nagradecemos sua preferencia!\n");
                 sobre();
@@ -102,12 +121,12 @@ function keyPress(): void {
     readlinesync.prompt();
 }
 
-export function sobre(): void { // "saiba mais"
+export function sobre(): void { // "saiba mais sobre o DevnaoCry!!"
     console.log("_________________________________________");
-    console.log("  Desenvolvido por: Filipe Santiago      ");
-    console.log("      https://github.com/DEVnaoCry       ");
-    console.log("                                         ");
-    console.log("#########################################");
+    console.log("########=> Desenvolvido por: $an.###### " );
+    console.log(" #### https://github.com/DEVnaoCry   ### ");
+    console.log("  ####                            ### ");
+    console.log("##################################");
     
 
 }
